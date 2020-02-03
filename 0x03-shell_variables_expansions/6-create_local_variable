@@ -1,0 +1,4 @@
+#!/bin/bash
+function local_variable(){
+    local BETTY=Holberton
+}
