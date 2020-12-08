@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Install nginx web server with the following requirements:
+# Listen on port 80
+# Return a page that contains the string "Holberton School" on requests
+apt -y update
+apt install -y nginx
+echo "Holberton School" | tee /var/www/html/index.html
+service nginx restart
