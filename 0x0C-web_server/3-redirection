@@ -2,14 +2,9 @@
 # Install nginx web server with the following requirements:
 # Listen on port 80
 # Return a page that contains the string "Holberton School" on requests
-#apt -y update
-#apt install -y nginx
-#echo "Holberton School" > tee /var/www/html/index.html
-#sed -i "/# SSL configuration/ i rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
-#sed -i 's/root \/var\/www\/html;/root \/var\/www\/html;\n\trewrite ^\/redirect_me http:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;/' /etc/nginx/sites-available/default
-#service nginx restart
-apt-get -y update
-apt-get -y install nginx
+apt -y update
+apt install -y nginx
 echo "Holberton School" > /var/www/html/index.html
-sed -i 's/root \/var\/www\/html;/root \/var\/www\/html;\n\trewrite ^\/redirect_me http:\/\/anyweb.com permanent;/' /etc/nginx/sites-available/default
-service nginx start
+#sed -i "/# SSL configuration/ i rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+sed -i 's/root \/var\/www\/html;/root \/var\/www\/html;\n\trewrite ^\/redirect_me http:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;/' /etc/nginx/sites-available/default
+service nginx restart
