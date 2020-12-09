@@ -22,6 +22,5 @@ file_line { 'sites-default':
 
 service { 'nginx':
   ensure  => running,
-  start   => '/user/sbin/service nginx restart',
   require => Package['nginx'],
 }
