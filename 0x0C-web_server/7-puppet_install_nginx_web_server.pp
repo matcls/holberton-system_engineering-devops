@@ -12,15 +12,16 @@ file { '/var/www/html/index.html':
   content => 'Holberton School',
 }
 
-file_line {  'sites-default':
+file_line { 'sites-default':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'root /var/www/html;',
   # Could use a shell command but this is more clean
-  line   => 'rewrite ^redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+  line   => '	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
 }
 
-service {  'nginx':
+service { 'nginx':
   ensure  => running,
+  start   => '/user/sbin/service nginx restart',
   require => Package['nginx'],
 }
