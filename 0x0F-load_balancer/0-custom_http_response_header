@@ -2,7 +2,6 @@
 # Configure custom Nginx HTTP header
 # shellcheck disable=SC2154
 sudo apt -y update
-sudo apt -y upgrade
 sudo apt -y install nginx
 sudo sed -i "11i\\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
 echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
