@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Install and configure HAproxy on a server.
+apt -y update
+apt -y install haproxy
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup3
+sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup4
+#sed -i "$ a\listen webapp 0.0.0.0:80\n\tmode http\n\tbalance roundrobin\n\toption httpclose\n\toption forwardfor\n\tserver gc-1512-web-01-1607317797 34.75.39.5:80 check\n\tserver gc-1512-web-02-1608527503 34.74.147.195:80 check" /etc/haproxy/haproxy.cfg
+echo "frontend web
+        bind *:80
+        mode http
+        default_backend webapp
+backend webapp
+        balance roundrobin
+        server 1512-web-01 34.75.39.5:80 check
+        server 1512-web-02 34.74.147.195:80 check" >> /etc/haproxy/haproxy.cfg
+service haproxy restart
