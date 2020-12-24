@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Display information about subdomains
+if [ $# -eq 1 ]; then
+	domains="www.$1 lb-01.$1 web-01.$1 web-02.$1"
+else
+	domains="$2.$1"
+fi
+# shellcheck disable=SC2059
+dig $domains | awk '/ANSWER SECTION:/ { getline; split($1, a, "."); print "The subdomain", a[1], "is a", $4, "record and points to", $5}'
