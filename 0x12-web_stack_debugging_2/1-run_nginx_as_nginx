@@ -1,1 +1,7 @@
 #!/usr/bin/env bash
+# Fix a server to run Nginx as user nginx
+# Listen on port 8080
+pkill -f apache2
+chmod 644 /etc/nginx/nginx.conf
+sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+sudo -u nginx service nginx restart
