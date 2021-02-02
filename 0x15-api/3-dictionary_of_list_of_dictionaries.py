@@ -29,9 +29,9 @@ def export_all_to_json(users_info, tasks):
 
     with open("todo_all_employees.json", "w") as jsonfile:
         json.dump({user.get("id"): [{
+                  "username": user.get("username"),
                   "task": task.get("title"),
-                  "completed": task.get("completed"),
-                  "username": user.get("username")
+                  "completed": task.get("completed")
                   } for task in tasks]
             for user in users_info}, jsonfile)
 
