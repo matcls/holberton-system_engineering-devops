@@ -16,8 +16,7 @@ def do_request():
     url = "https://jsonplaceholder.typicode.com/"
     users_info = requests.get(url + "users").json()
 
-    for user in users_info:
-        tasks = requests.get(url + "todos").json()
+    tasks = requests.get(url + "todos").json()
 
     return users_info, tasks
 
