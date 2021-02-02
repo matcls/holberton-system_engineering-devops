@@ -26,12 +26,6 @@ def do_request():
     user_info = requests.get(url + "users/{}".format(employee_id)).json()
     tasks = requests.get(url + "todos", params={"userId": employee_id}).json()
 
-    completed = [task.get("title") for task in tasks
-                 if task.get("completed") is True]
-    print("Employee {} is done with tasks({}/{}):".format(
-        user_info.get("name"), len(completed), len(tasks)))
-    [print("\t {}".format(c)) for c in completed]
-    export_to_csv(employee_id, user_info, tasks)
     return employee_id, user_info, tasks
 
 
@@ -39,6 +33,7 @@ def export_to_csv(employee_id, user_info, tasks):
     """Export the empployee TODO data in a CSV format file."""
     import csv
 
+    print(employee_id)
     with open("{}.csv".format(employee_id), "w", newline="") as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         [writer.writerow(
