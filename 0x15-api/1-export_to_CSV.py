@@ -30,7 +30,7 @@ def do_request():
 
 
 def export_to_csv(employee_id, user_info, tasks):
-    """Export the empployee TODO data in a CSV format file."""
+    """Export the empployee TODO data to a CSV format file."""
     import csv
 
     INFO = ["EMPLOYEE_ID", "USERNAME", "TASK_STATUS", "TASK_TITLE"]
