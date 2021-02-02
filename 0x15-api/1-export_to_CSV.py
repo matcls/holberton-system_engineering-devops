@@ -33,16 +33,19 @@ def export_to_csv(employee_id, user_info, tasks):
     """Export the empployee TODO data in a CSV format file."""
     import csv
 
+    INFO = ["EMPLOYEE_ID", "USERNAME", "TASK_STATUS", "TASK_TITLE"]
+
     with open("{}.csv".format(employee_id), "w", newline="") as csvfile:
-        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        writer = csv.DictWriter(csvfile, fieldnames=INFO,
+                                quoting=csv.QUOTE_ALL)
         [writer.writerow(
-            [employee_id,
-             user_info.get("username"),
-             task.get("completed"),
-             task.get("title")])
+            {"EMPLOYEE_ID": employee_id,
+             "USERNAME": user_info.get("username"),
+             "TASK_STATUS": task.get("completed"),
+             "TASK_TITLE": task.get("title")})
             for task in tasks]
 
 
 if __name__ == "__main__":
-    data = do_request()
-    export_to_csv(*data)
+    employee_data = do_request()
+    export_to_csv(*employee_data)
