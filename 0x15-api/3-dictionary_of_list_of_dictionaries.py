@@ -17,8 +17,7 @@ def do_request():
     users_info = requests.get(url + "users").json()
 
     for user in users_info:
-        tasks = requests.get(url + "todos",
-                             params={"userId": user.get("id")}).json()
+        tasks = requests.get(url + "todos").json()
 
     return users_info, tasks
 
@@ -32,7 +31,7 @@ def export_all_to_json(users_info, tasks):
                   "username": user.get("username"),
                   "task": task.get("title"),
                   "completed": task.get("completed")
-                  } for task in tasks]
+                  } for task in tasks if user.get("id") == task.get('userId')]
             for user in users_info}, jsonfile)
 
 
