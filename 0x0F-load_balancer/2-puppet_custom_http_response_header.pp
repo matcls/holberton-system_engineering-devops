@@ -1,5 +1,5 @@
 #Configure custom Nginx HTTP header
-exec { '/usr/bin/env apt-get -y update' : }
+exec { '/usr/bin/env apt -y update' : }
 -> package { 'nginx':
   ensure => installed,
 }
