@@ -15,18 +15,22 @@ def count_words(subreddit, word_list):
     if not hot_list:
         return None
     else:
-        word_dict = {word: 0 for word in word_list}
+        word_dict = {word.lower(): 0 for word in word_list}
 
     for title in hot_list:
         title_split = title.split(" ")
-        for word in title_split:
-            for s_word in word_list:
-                if word.lower() == s_word.lower():
-                    word_dict[s_word] += 1
+        title_words = [word for word in title_split]
+        for word in word_dict:
+            count = title_words.count(word)
+            if count > 0:
+                word_dict[word] += count
 
-    for k, v in sorted(word_dict.items(), key=lambda kv: kv[1], reverse=True):
-        if v != 0:
-            print("{}: {}".format(k, v))
+    word_list = [
+        [word, count] for word, count in word_dict.items() if count > 0
+    ]
+    word_list = sorted(word_list, key=lambda x: x[1], reverse=True)
+    for word in word_list:
+        print('{}: {}'.format(word[0], word[1]))
 
 
 def recurse(subreddit, hot_list=[]):
@@ -42,8 +46,9 @@ def recurse(subreddit, hot_list=[]):
     if after is None:
         return hot_list
     data = request.json().get('data').get('children')
+
     for post in data:
-        hot_list.append(post.get('data').get('title'))
+        hot_list.append(post.get('data').get('title').lower())
 
     after = request.json().get('data').get('after')
     recurse(subreddit, hot_list)
